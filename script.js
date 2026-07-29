@@ -1,26 +1,25 @@
 // ==== Dados ====
 const materiais = [
-  { nome: "Metal (alumínio, aço)", faixa: "3 kg a 9 kg", pontos: 20, cor: "#c98b3b" },
-  { nome: "Plástico", faixa: "5 kg a 10 kg", pontos: 12, cor: "#3c78c2" },
-  { nome: "Papel e papelão misto", faixa: "5 kg a 15 kg", pontos: 10, cor: "#b58a4a" },
-  { nome: "Papel branco (folhas, cadernos)", faixa: "10 kg a 15 kg", pontos: 18, cor: "#e6dcbb" },
-  { nome: "Vidro", faixa: "3 kg a 8 kg", pontos: 15, cor: "#5fb69f" }
+  { nome: "Metal (ferro, aço)", faixa: "3 kg", pontos: "75 ", cor: "#c98b3b" },
+  { nome: "Plástico (garrafas, embalagens)", faixa: "2 kg", pontos: "40 ", cor: "#3c78c2" },
+  { nome: "papelão", faixa: "2 kg", pontos: "30 ", cor: "#b58a4a" },
+  { nome: "Papel branco (folhas, cadernos)", faixa: "3 kg", pontos: "30 ", cor: "#e6dcbb" },
+  { nome: "Vidro", faixa: "2 kg", pontos: "30 ", cor: "#5fb69f" },
+  { nome: "Alumínio (latas)", faixa: " 3  kg", pontos: "45 ", cor: "#9b9276" }
 ];
 
+const lojasParceiras = [
+  {nome: "Oxxo", endereco: "Alameda Nothmann", horario: "Seg a Sex, 24 horas"},
+  {nome: "Drogasil", endereco: "Avenida Sapopemba, 11180", horario: "Dom a Dom, 7h até 22h"}
+]
+
 const cupons = [
-  "10% de desconto em produtos selecionados",
-  "Leve 3, pague 2",
-  "Café grátis na compra do combo",
-  "Sobremesa grátis",
-  "Frete grátis",
-  "Pontos extras no programa de fidelidade"
+  "Vá até uma loja parceira e consulte a % de desconto que você tem com base nos seus pontos adquiridos"
 ];
 
 const locais = [
   { nome: "EcoPonto Centro", endereco: "Praça Central, 120 — Centro", horario: "Seg a Sáb, 8h às 18h" },
-  { nome: "EcoPonto Zona Sul", endereco: "Av. das Palmeiras, 890 — Jardim Sul", horario: "Seg a Sex, 9h às 17h" },
-  { nome: "EcoPonto Universidade", endereco: "Campus Universitário, Bloco A", horario: "Seg a Sex, 8h às 20h" },
-  { nome: "EcoPonto Bairro Verde", endereco: "Rua das Acácias, 45", horario: "Ter a Dom, 9h às 18h" }
+  { nome: "EcoPonto Zona Sul", endereco: "Av. das Palmeiras, 890 — Jardim Sul", horario: "Seg a Sex, 9h às 17h" } 
 ];
 
 function formatPontosPorKg(value) {
@@ -28,13 +27,13 @@ function formatPontosPorKg(value) {
 }
 
 function calculaRangePontos(faixa, pontos) {
-  const match = faixa.match(/(\d+(?:[\.,]\d+)?)\s*kg\s*a\s*(\d+(?:[\.,]\d+)?)\s*kg/i);
+  const match = faixa.match(/(\d+(?:[\.,]\d+)?)\s*kg\s*a\s*(zd+(?:[\.,]\d+)?)\s*kg/i);
   if (!match) return "";
   const minKg = parseFloat(match[1].replace(",", "."));
   const maxKg = parseFloat(match[2].replace(",", "."));
   const minPts = Math.round(minKg * pontos);
-  const maxPts = Math.round(maxKg * pontos);
-  return `${minKg}–${maxKg} kg → ${minPts}-${maxPts} pontos`;
+  const maxPts = Math.round(maxPts * pontos);
+  return `${minKg}-${maxKg} kg => ${minPts}-${maxPts} pontos`;
 }
 
 // ==== Páginas ====
@@ -43,8 +42,8 @@ const pages = {
     <section class="hero">
       <div class="container hero-inner">
         <span class="tag" style="background:rgba(255,255,255,.18);color:#fff">Reciclagem que recompensa</span>
-        <h1>Transforme reciclagem em pontos de verdade</h1>
-        <p>Entregue seus recicláveis nos EcoPontos, acumule pontos por kg e troque por cupons no comércio parceiro. Simples, justo e sustentável.</p>
+        <h1>Transforme reciclagem em desconto de verdade</h1>
+        <p>Entregue seus recicláveis nos EcoPontos, acumule pontos e troque por cupons no comércio parceiro. Simples, justo e sustentável.</p>
         <div class="cta-row">
           <a href="#/parcerias" data-link class="btn btn-primary">Ver recompensas</a>
           <a href="#/locais" data-link class="btn btn-ghost">Encontrar EcoPonto</a>
@@ -104,17 +103,17 @@ const pages = {
         <div class="card">
           <div class="icon">🌱</div>
           <h3>Quem somos</h3>
-          <p class="muted">A Eco-Cyclo nasceu para mostrar que reciclar pode ser prático e vantajoso. Coletamos, pesamos e destinamos corretamente cada material — e devolvemos parte do valor gerado ao consumidor em forma de cupons.</p>
+          <p class="muted">A EcoCycle é uma empresa voltada para a sustentabilidade, especializada na coleta, separação e destinação correta de materiais recicláveis. Nosso objetivo é reduzir o impacto ambiental, incentivar a reciclagem e contribuir para um futuro mais sustentável</p>
         </div>
         <div class="card">
           <div class="icon">🔁</div>
           <h3>Como funciona</h3>
-          <p class="muted">Os materiais entregues são vendidos para indústrias de reciclagem. Parte da receita financia os cupons que você resgata com seus pontos. O comércio parceiro complementa com promoções que fazem sentido para ele.</p>
+          <p class="muted"> É uma empresa de reciclagem com um programa de recompensas: A pessoa leva materiais recicláveis, nós pesamos, registramos os pontos, e ela troca esses pontos por descontos em supermercados, lojas de roupas, farmácias ou outras lojas em que temos parceria.</p>
         </div>
         <div class="card">
           <div class="icon">🌍</div>
           <h3>Nosso impacto</h3>
-          <p class="muted">Cada quilo reciclado reduz o volume de lixo em aterros, poupa recursos naturais e movimenta a economia local. Reciclagem deixou de ser só um gesto — virou moeda.</p>
+          <p class="muted">A EcoCyclo gera um impacto positivo para o meio ambiente, para a sociedade e para a economia. Ao incentivar a reciclagem por meio de recompensas e descontos, a empresa reduz o descarte incorreto de resíduos, promove a conscientização ambiental e ajuda as pessoas a economizar.</p>
         </div>
         <div class="card">
           <div class="icon">🤝</div>
@@ -147,7 +146,7 @@ const pages = {
 
     <section class="block" style="padding-top:0">
       <div class="container">
-        <h2 style="margin-bottom:1.25rem">Tabela de materiais e pontos por kg</h2>
+        <h2 style="margin-bottom:1.25rem">Tabela de materiais, pontos e descontos</h2>
         <div class="grid grid-3">
           ${materiais.map(m => `
             <article class="card card-soft">
@@ -155,7 +154,7 @@ const pages = {
               <h3 style="font-size:1.1rem">${m.nome}</h3>
               <dl class="dl">
                 <div class="dl-row"><dt>Faixa aceita</dt><dd>${m.faixa}</dd></div>
-                <div class="dl-row"><dt>Pontos por kg</dt><dd>${formatPontosPorKg(m.pontos)}</dd></div>
+                <div class="dl-row"><dt>Ponto</dt><dd>${formatPontosPorKg(m.pontos)}</dd></div>
                 <div class="dl-row"><dt>Exemplo</dt><dd>${calculaRangePontos(m.faixa, m.pontos)}</dd></div>
               </dl>
             </article>
@@ -169,16 +168,16 @@ const pages = {
         <div class="card">
           <div class="icon">🪙</div>
           <h3>Modelo cashback em pontos</h3>
-          <p class="muted">Você entrega, por exemplo, <strong>5 kg de alumínio</strong> e ganha <strong>100 pontos</strong> na sua conta Eco-Cyclo. Os pontos podem ser trocados por cupons em empresas parceiras — cada empresa decide quanto vale cada cupom, oferecendo apenas promoções que fazem sentido para o seu negócio.</p>
+          <p class="muted">Você entrega, por exemplo, <strong>5 kg de Metal</strong> e ganha <strong>125 pontos</strong> na sua conta Eco-Cyclo. Os pontos podem ser trocados por cupons em empresas parceiras — cada empresa decide quanto vale cada cupom, oferecendo apenas promoções que fazem sentido para o seu negócio.</p>
           <div class="exchange">
-            <span>5 kg de alumínio</span>
+            <span>5 kg de Metal</span>
             <span>→</span>
-            <strong>100 pts</strong>
+            <strong>125 pts</strong>
           </div>
         </div>
         <div class="card">
           <div class="icon">🎟️</div>
-          <h3>Exemplos de cupons</h3>
+          <h3>Cupons</h3>
           <ul class="bullets">
             ${cupons.map(c => `<li>${c}</li>`).join("")}
           </ul>
